@@ -60,11 +60,11 @@ class ResNestUNet_aspp(nn.Module):
         filters = [4 * 64, 4 * 128, 4 * 256, 4 * 512]
 
         #GCN
-        self.gcn = GraphCNN(in_c=48, hid_c=64, out_c=64, dropout=dropout,edg=edg)  #输入的是3通道图(b,3,256,256)->reshape (b,3,64,64)，输出的是1通道图片(b,1,64,64)
+        self.gcn = GraphCNN(in_c=48, hid_c=64, out_c=64, dropout=dropout,edg=edg)
         self.ap_model = Apmodel
         self.dropout = dropout
         self.unshuffle = nn.PixelUnshuffle(4)
-        self.ConvUp = ConvRelu(64,64,3,1) #torch.Size([2, 64, 64, 64]) 卷积核是3，padding是1 ,输出原图像大小
+        self.ConvUp = ConvRelu(64,64,3,1)
 
         #Encode
         self.encoder0 = nn.Sequential(*self.base_layers[:4])
